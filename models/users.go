@@ -182,7 +182,7 @@ func CheckLogin(username, password string) (response Token, status bool, msg str
 			oauthToken.Token = tokenString
 			oauthToken.UserId = user.ID
 			oauthToken.Secret = "secret"
-			oauthToken.Revoked = false
+			oauthToken.Revoked = 0
 			oauthToken.ExpressIn = time.Now().Add(time.Hour * time.Duration(1)).Unix()
 			oauthToken.CreatedAt = time.Now()
 
@@ -204,7 +204,7 @@ func CheckLogin(username, password string) (response Token, status bool, msg str
 * @method UserAdminLogout
 * @param  {[type]} ids string [description]
  */
-func UserAdminLogout(userId uint) bool {
+func UserAdminLogout(userId uint) uint {
 	ot := UpdateOauthTokenByUserId(userId)
 	return ot.Revoked
 }

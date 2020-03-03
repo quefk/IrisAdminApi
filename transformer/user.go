@@ -6,5 +6,6 @@ type User struct {
 	Username  string
 	RoleName  string
 	RoleIds   []int
+	Roles     string
 	CreatedAt string
 }

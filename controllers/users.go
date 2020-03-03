@@ -222,18 +222,22 @@ func userTransform(user *models.User) *transformer.User {
 	roleIds, _ := models.Enforcer.GetRolesForUser(strconv.FormatUint(uint64(user.ID), 10))
 	var ris []int
 	var roleName string
+	var roles string
 	for num, roleId := range roleIds {
 		ri, _ := strconv.Atoi(roleId)
 		ris = append(ris, ri)
 		role := models.GetRoleById(uint(ri))
 		if num == len(roleIds)-1 {
 			roleName += role.DisplayName
+			roles += role.Name
 		} else {
 			roleName += role.DisplayName + ","
+			roles += role.Name + ","
 		}
 
 	}
 	u.RoleIds = ris
 	u.RoleName = roleName
+	u.Roles = roles
 	return u
 }
